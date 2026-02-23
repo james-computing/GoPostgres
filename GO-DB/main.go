@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"os"
 
@@ -25,6 +26,17 @@ func main() {
 	defer dbConnection.Close()
 
 	createTable(dbConnection)
+
+	var product1 Product = Product{Name: "Alice"}
+	var product2 Product = Product{Name: "Bob"}
+	var product3 Product = Product{Name: "Carl"}
+	var product4 Product = Product{Name: "Daniel"}
+	var products []Product = []Product{product1, product2, product3, product4}
+
+	for i := 0; i < len(products); i++ {
+		id := insertProduct(dbConnection, &products[i])
+		fmt.Printf("Id = %v\n", id)
+	}
 }
 
 func getConnectionString() string {
