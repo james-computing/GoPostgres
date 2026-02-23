@@ -33,9 +33,11 @@ func main() {
 	var product4 Product = Product{Name: "Daniel"}
 	var products []Product = []Product{product1, product2, product3, product4}
 
+	var ids []int = []int{}
+
 	for i := 0; i < len(products); i++ {
-		id := insertProduct(dbConnection, &products[i])
-		fmt.Printf("Id = %v\n", id)
+		ids = append(ids, insertProduct(dbConnection, &products[i]))
+		fmt.Printf("Id = %v\n", ids[i])
 	}
 }
 
