@@ -39,6 +39,14 @@ func main() {
 		ids = append(ids, insertProduct(dbConnection, &products[i]))
 		fmt.Printf("Id = %v\n", ids[i])
 	}
+
+	// Get the products back from the database
+	var prodPtr *Product
+	fmt.Println("Getting products from the database...")
+	for i := 0; i < len(ids); i++ {
+		prodPtr = getProduct(dbConnection, ids[i])
+		fmt.Println(*prodPtr)
+	}
 }
 
 func getConnectionString() string {
