@@ -47,6 +47,10 @@ func main() {
 		prodPtr = getProduct(dbConnection, ids[i])
 		fmt.Println(*prodPtr)
 	}
+
+	fmt.Println("Getting all products from the database...")
+	allProducts := getAllProducts(dbConnection)
+	fmt.Println(allProducts)
 }
 
 func getConnectionString() string {
