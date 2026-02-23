@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 
@@ -11,7 +10,6 @@ import (
 
 func main() {
 	connectionString := getConnectionString()
-	fmt.Println(connectionString)
 
 	dbConnection, err := sql.Open("postgres", connectionString)
 	if err != nil {
