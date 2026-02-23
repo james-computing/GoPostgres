@@ -51,3 +51,16 @@ type Product struct {
 	Id   int
 	Name string
 }
+
+func insertProduct(dbConnection *sql.DB, product *Product) int {
+	// Variable for the primary key to be returned from the database
+	var id int
+	// Make a query that inserts a product and returns the generated id
+	query := `INSERT INTO product (name) VALUES($1) RETURNING id`
+	// Execute the query and scan the id
+	err := dbConnection.QueryRow(query, product.Name).Scan(&id)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return id
+}
