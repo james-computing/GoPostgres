@@ -78,3 +78,19 @@ func insertProduct(dbConnection *sql.DB, product *Product) int {
 	}
 	return id
 }
+
+// Returning a pointer to a local struct would be unsafe in C/C++,
+// but it is safe in go.
+func getProduct(dbConnection *sql.DB, id int) *Product {
+	var product Product
+	query := `SELECT name FROM products WHERE id=$1`
+	err := dbConnection.QueryRow(query, id).Scan(&product.Name)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			log.Fatalf("No row found with Id = %v\n", id)
+		}
+		log.Fatal()
+	}
+	product.Id = id
+	return &product
+}
