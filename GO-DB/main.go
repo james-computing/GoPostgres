@@ -102,3 +102,25 @@ func getProduct(dbConnection *sql.DB, id int) *Product {
 	product.Id = id
 	return &product
 }
+
+func getAllProducts(dbConnection *sql.DB) []Product {
+	query := `SELECT id, name FROM products`
+	rows, err := dbConnection.Query(query)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer rows.Close()
+
+	var products []Product
+	var id int
+	var name string
+	for rows.Next() {
+		err = rows.Scan(&id, &name)
+		if err != nil {
+			log.Fatal(err)
+		}
+		products = append(products, Product{Id: id, Name: name})
+	}
+	return products
+}
