@@ -46,3 +46,8 @@ func createTable(dbConnection *sql.DB) {
 		log.Fatal()
 	}
 }
+
+type Product struct {
+	Id   int
+	Name string
+}
