@@ -54,7 +54,7 @@ func main() {
 }
 
 func getConnectionString() string {
-	bytes, err := os.ReadFile("../secrets/connectionString.txt")
+	bytes, err := os.ReadFile("./secrets/connectionString.txt")
 	if err != nil {
 		log.Fatal()
 	}
